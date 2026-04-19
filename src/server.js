@@ -2,7 +2,10 @@ const express = require('express');
 const app = express();
 const connectDB = require('./config/db');
 const authRoutes = require("./routes/authRoutes");
+const transactionRoutes = require("./routes/transactionRoutes");
 require('dotenv').config();
+
+
 
 
 app.use(express.json());
@@ -14,7 +17,7 @@ app.get('/', (req, res) => {
 
 
 app.use("/auth", authRoutes);
-
+app.use("/transactions", transactionRoutes);
 
 connectDB();
 
