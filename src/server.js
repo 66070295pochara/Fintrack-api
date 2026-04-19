@@ -4,11 +4,9 @@ const connectDB = require('./config/db');
 const authRoutes = require("./routes/authRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
 require('dotenv').config();
-
-
-
-
 app.use(express.json());
+
+
 
 app.get('/', (req, res) => {
     res.send("Welcome to Finance API");
