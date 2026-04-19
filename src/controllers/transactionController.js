@@ -20,15 +20,22 @@ exports.createTransaction = async (req, res) => {
 
 exports.getTransactions = async (req, res) => {
     try {
-        const transactions = await Transaction.find({
-            user: req.user.userId,
-        });
+       const userId = req.user.userId;
+       const { type } = req.query;
+       let filter = {
+         user : userId
+        };
+        if (type) {
+            filter.type = type;
+        }
+        const transactions = await Transaction.find(filter).sort({ createdAt: -1 });
+         res.json(transactions);
 
-        res.status(200).json(transactions);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
+
 
 
 exports.getSummary = async (req, res) => {
